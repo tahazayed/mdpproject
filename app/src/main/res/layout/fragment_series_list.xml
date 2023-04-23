@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.moviescreen.MovieListFragment">
+    tools:context=".ui.home.seriesscreen.SeriesListFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Movie List" />
+        android:text="Series List" />
 
 </FrameLayout>

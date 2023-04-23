@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.android.finalproject.data.model.BaseAppResponse
 import com.google.gson.Gson
 
 class PrefDataSourceImp(private val context: Context) : PrefDataSource {
@@ -36,15 +35,15 @@ class PrefDataSourceImp(private val context: Context) : PrefDataSource {
         setStringPreference(Constants.TOKEN_PREF, token)
     }
 
-    override fun getSharedPrefBaseAppResponse(): BaseAppResponse? {
+    override fun getSharedPrefBaseAppResponse(): String? {
         val jsonString: String = getStringPreference(Constants.BASE_APP_RESPONSE, "")
         if (jsonString.isNotEmpty())
-            return Gson().fromJson(jsonString, BaseAppResponse::class.java)
+            return Gson().fromJson(jsonString, String::class.java)
         else
             return null
     }
 
-    override fun setSharedPrefBaseAppResponse(baseAppResponse: BaseAppResponse) {
+    override fun setSharedPrefBaseAppResponse(baseAppResponse: String) {
         val json: String = Gson().toJson(baseAppResponse)
         setStringPreference(Constants.BASE_APP_RESPONSE, json)
     }

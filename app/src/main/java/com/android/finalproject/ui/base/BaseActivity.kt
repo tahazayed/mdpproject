@@ -55,7 +55,7 @@ open class BaseActivity : AppCompatActivity() {
     fun getCurrentLanguage(): Locale = localizationDelegate.getLanguage(applicationContext)
 
 
-    fun showRootedDailog()
+    fun showRootedDialog()
     {
         val builder = AlertDialog.Builder(this)
         //set title for alert dialog

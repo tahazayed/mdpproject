@@ -5,20 +5,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.android.finalproject.data.model.BaseAppResponse
 import com.android.finalproject.data.database.typeConverter.DateTypeConverter
+import com.android.finalproject.data.model.User
 
 @Database(
-    entities = [BaseAppResponse::class], version = 1
+    entities = [User::class], version = 1
 )
 @TypeConverters(
     DateTypeConverter::class
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun baseAppDao(): BaseAppDao
+    abstract fun userDao(): UserDao
 
     companion object {
-        private const val DB_NAME = "base_app.db"
+        private const val DB_NAME = "movie_app.db"
 
         fun getInstance(context: Context): AppDatabase {
             return Room.databaseBuilder(

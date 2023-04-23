@@ -1,11 +1,11 @@
-package com.android.finalproject.ui.landing
+package com.android.finalproject.ui.home.moviescreen
 
 import com.android.finalproject.data.repositories.Repository
 import com.android.finalproject.ui.base.BaseViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
-class MovieListViewModel(
+class HomeViewModel(
     private val repository: Repository,
 ) : BaseViewModel() {
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Final Project</string>
+    <string name="app_name">Movie App</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="connection_refused">Connection refused</string>
@@ -7,5 +7,30 @@
     <string name="network_error">Network error</string>
     <string name="connect_to_server">Couldn\'t connect to server</string>
     <string name="something_went_wrong">Something went wrong</string>
-    <string name="loading">loading...</string>
+    <string name="loading">loading…</string>
+    <string name="profile">Profile</string>
+    <string name="series">Series</string>
+    <string name="movies">Movies</string>
+
+    <string name="password_required">Password (required)</string>
+    <string name="email_address_required">Email address (required)</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="don_t_have_account">Don\'t have an account?</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="sign_into_your_account">Sign into your account</string>
+    <string name="shop_by_categories">Shop by categories</string>
+    <string name="medicines">Medicines</string>
+    <string name="organic_food">Organic Food</string>
+    <string name="books">Books</string>
+    <string name="clothing">Clothing</string>
+    <string name="create_your_account">Create your account</string>
+    <string name="required_filed">* required filed</string>
+    <string name="email_address">Email address*</string>
+    <string name="password">Password*</string>
+    <string name="name">Name*</string>
+    <string name="last_name">Last name*</string>
+    <string name="create_account">Create Account</string>
+    <string name="invalid_credentials">Invalid Email Or Password!</string>
+    <string name="can_not_be_empty">Can\'t be Empty</string>
 </resources>

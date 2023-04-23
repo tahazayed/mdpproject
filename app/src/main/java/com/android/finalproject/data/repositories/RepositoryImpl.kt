@@ -3,8 +3,8 @@ package com.android.finalproject.data.repositories
 import com.android.finalproject.data.database.DbDataSource
 import com.android.finalproject.data.model.APIError
 import com.android.finalproject.data.model.APIResult
-import com.android.finalproject.data.model.BaseAppResponse
 import com.android.finalproject.data.model.FailureException
+import com.android.finalproject.data.model.User
 import com.android.finalproject.data.offline.Offline
 import com.android.finalproject.data.raw.RawDataSource
 import com.android.finalproject.data.remote.RemoteDataSource
@@ -30,7 +30,7 @@ class RepositoryImp(
 
     override fun getSharedPrefBaseAppResponse() = prefDataSource.getSharedPrefBaseAppResponse()
 
-    override fun setSharedPrefBaseAppResponse(baseAppResponse: BaseAppResponse) =
+    override fun setSharedPrefBaseAppResponse(baseAppResponse: String) =
         prefDataSource.setSharedPrefBaseAppResponse(baseAppResponse)
 
     override fun logOut() = prefDataSource.logOut()
@@ -60,7 +60,9 @@ class RepositoryImp(
 
     // ---------- database------------
 
-    override suspend fun getAllDataInTable() = dbDataSource.getAllDataInTable()
+    override suspend fun getAllMatchedUser(email: String) = dbDataSource.getAllMatchedUser(email)
+
+    override suspend fun addUser(user: User) = dbDataSource.addUser(user)
 
     // ---------- end database------------
 
@@ -71,7 +73,7 @@ class RepositoryImp(
                 APIResult.Success(response.body())
             }
             response.code() == 401 -> {
-                throw  FailureException.InvalidUserException("", 401)
+                throw FailureException.InvalidUserException("", 401)
             }
             else -> {
                 APIResult.Failure(APIError(response.raw().message, "", "", response.code()))

@@ -1,4 +1,4 @@
-package com.android.finalproject.ui.landing
+package com.android.finalproject.ui.home.moviescreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.finalproject.databinding.FragmentMovieListBinding
 import com.android.finalproject.ui.base.BaseViewModelFragment
-import kotlinx.coroutines.flow.onEach
 
 
 class MovieListFragment :
-    BaseViewModelFragment<MovieListViewModel, FragmentMovieListBinding>(
-        MovieListViewModel::class
+    BaseViewModelFragment<HomeViewModel, FragmentMovieListBinding>(
+        HomeViewModel::class
     ) {
 
     override fun onCreateView(
@@ -28,5 +27,7 @@ class MovieListFragment :
 
     override fun initObservers() {
         super.initObservers()
+
+
     }
 }
