@@ -1,5 +1,11 @@
 package com.android.finalproject.data.model
 
+import android.os.Parcelable
+import androidx.annotation.Keep
+import kotlinx.parcelize.Parcelize
+
+@Keep
+@Parcelize
 data class TvShow(
     val backdrop_path: String,
     val first_air_date: String,
@@ -14,4 +20,4 @@ data class TvShow(
     val poster_path: String,
     val vote_average: Double,
     val vote_count: Int
-)
+):Parcelable

@@ -20,12 +20,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    flavorDimensions "dummy_dim"
+    flavorDimensions "dev"
     productFlavors {
-        dummy {
-            dimension "dummy_dim"
+        dev {
+            dimension "dev"
             versionNameSuffix ".dev"
-            buildConfigField "String", "BASE_URL", "\"https://api-cereal-plant-css-build.apps.dev.use1.devops.syngentadigitalapps.com/\""
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "API_KEY", "\"f2bd63b408d7401fb96d0fda0b14e238\""
         }
     }
 

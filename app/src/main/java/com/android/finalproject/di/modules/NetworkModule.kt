@@ -2,7 +2,7 @@ package com.android.finalproject.di.modules
 
 import android.content.Context
 import com.android.finalproject.BuildConfig
-import com.android.finalproject.data.remote.BaseAppAPI
+import com.android.finalproject.data.remote.MovieAppAPI
 import com.android.finalproject.util.NetworkConnectionInterceptor
 import com.android.finalproject.util.NetworkHelper
 import okhttp3.OkHttpClient
@@ -60,5 +60,5 @@ private fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         .client(okHttpClient)
         .build()
 
-private fun provideApiService(retrofit: Retrofit): BaseAppAPI =
-    retrofit.create(BaseAppAPI::class.java)
+private fun provideApiService(retrofit: Retrofit): MovieAppAPI =
+    retrofit.create(MovieAppAPI::class.java)
