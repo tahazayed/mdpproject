@@ -69,4 +69,18 @@ interface MovieAppAPI {
         @Query("api_key") apiKey: String,
         @Query("language") language: String = "en-US",
     ): Response<TvGenreList>
+
+    @GET("discover/tv")
+    suspend fun discoverTvShows(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("sort_by") sortBy: String
+    ): Response<TvShowsList>
+
+    @GET("discover/movie")
+    suspend fun discoverMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("sort_by") sortBy: String
+    ): Response<MoviesList>
 }
