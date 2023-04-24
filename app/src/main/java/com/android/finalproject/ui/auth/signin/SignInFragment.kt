@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.onEach
 class SignInFragment : BaseViewModelFragment<SignInViewModel, FragmentSignInBinding>(
     SignInViewModel::class
 ) {
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

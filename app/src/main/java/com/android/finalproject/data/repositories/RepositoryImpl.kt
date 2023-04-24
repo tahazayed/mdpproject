@@ -1,10 +1,7 @@
 package com.android.finalproject.data.repositories
 
 import com.android.finalproject.data.database.DbDataSource
-import com.android.finalproject.data.model.APIError
-import com.android.finalproject.data.model.APIResult
-import com.android.finalproject.data.model.FailureException
-import com.android.finalproject.data.model.User
+import com.android.finalproject.data.model.*
 import com.android.finalproject.data.offline.Offline
 import com.android.finalproject.data.raw.RawDataSource
 import com.android.finalproject.data.remote.RemoteDataSource
@@ -49,6 +46,8 @@ class RepositoryImp(
     // ----------remote------------
 
     override suspend fun getBaseAppResponse() = safeAPIResult(remoteDataSource.getBaseAppResponse())
+    override suspend fun getDiscoverMovies(sortBy: String) = safeAPIResult(remoteDataSource.getDiscoverMovies(sortBy))
+    override suspend fun getDiscoverTvShows(sortBy: String) = safeAPIResult(remoteDataSource.getDiscoverTvShows(sortBy))
 
     // ---------- end remote------------
 

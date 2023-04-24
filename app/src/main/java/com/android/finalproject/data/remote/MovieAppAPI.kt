@@ -71,16 +71,16 @@ interface MovieAppAPI {
     ): Response<TvGenreList>
 
     @GET("discover/tv")
-    suspend fun discoverTvShows(
+    suspend fun getDiscoverTvShows(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String,
-        @Query("sort_by") sortBy: String
+        @Query("language") language: String = "en-US",
+        @Query("sort_by") sortBy: String = ""
     ): Response<TvShowsList>
 
     @GET("discover/movie")
-    suspend fun discoverMovies(
+    suspend fun getDiscoverMovies(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String,
-        @Query("sort_by") sortBy: String
+        @Query("language") language: String = "en-US",
+        @Query("sort_by") sortBy: String = ""
     ): Response<MoviesList>
 }
