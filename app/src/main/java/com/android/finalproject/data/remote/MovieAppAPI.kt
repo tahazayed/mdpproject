@@ -85,4 +85,18 @@ interface MovieAppAPI {
         @Query("sort_by") sortBy: String = "popularity.desc",
         @Query("with_genres") withGenres: String = ""
     ): Response<MoviesList>
+
+    @GET("movie/{movieId}/videos")
+    suspend fun getMovieVideos(
+        @Path("movieId") movieId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "en-US"
+    ): Response<VideosList>
+
+    @GET("tv/{tvId}/videos")
+    suspend fun getTvShowVideos(
+        @Path("tvId") tvId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "en-US"
+    ): Response<VideosList>
 }
