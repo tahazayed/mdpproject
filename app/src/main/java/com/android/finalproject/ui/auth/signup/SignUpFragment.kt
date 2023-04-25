@@ -62,6 +62,9 @@ class SignUpFragment : BaseViewModelFragment<SignUpViewModel, FragmentSignUpBind
                 SignUpFormResponseState.EmailIsEmpty -> {
                     binding.etEmail.error = getString(R.string.can_not_be_empty)
                 }
+                SignUpFormResponseState.EmailIsNotValid -> {
+                    binding.etEmail.error = getString(R.string.invalid_email)
+                }
                 SignUpFormResponseState.NameIsEmpty -> {
                     binding.etName.error = getString(R.string.can_not_be_empty)
                 }
@@ -80,7 +83,7 @@ class SignUpFragment : BaseViewModelFragment<SignUpViewModel, FragmentSignUpBind
                 SignUpResponseState.Failure -> {
                     Toast.makeText(
                         requireContext(),
-                        "Something Went Wrong.",
+                        "Email Already Registered.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

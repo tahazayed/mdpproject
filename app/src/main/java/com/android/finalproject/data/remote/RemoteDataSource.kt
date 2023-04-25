@@ -6,7 +6,8 @@ import retrofit2.Response
 
 interface RemoteDataSource {
     suspend fun getBaseAppResponse(): Response<String>
-
+    suspend fun getPopularMovies(): Response<MoviesList>
+    suspend fun getPopularTvShows(): Response<TvShowsList>
     suspend fun getDiscoverMovies(
         sortBy: String
     ): Response<MoviesList>

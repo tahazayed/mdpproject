@@ -101,16 +101,19 @@ dependencies {
     api deps.support.cardView
     api deps.support.constraintlayout
     api deps.support.material
-    // navigation
 
+    // navigation
     api deps.android.navigationfragment
     api deps.android.navigationui
     api deps.android.navigationdynamic
     api deps.android.gson
     api deps.android.guava
-
     api deps.android.lifecycleExt
     api deps.android.lifecycleCommon
+
+    //scalable
+    api deps.scalable.sdp
+    api deps.scalable.ssp
 
     api deps.room_db.room
     kapt deps.room_db.room_compiler

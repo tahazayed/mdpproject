@@ -56,6 +56,10 @@ class SignInFragment : BaseViewModelFragment<SignInViewModel, FragmentSignInBind
     override fun initObservers() {
         super.initObservers()
 
+        viewModel.str?.observe(this){
+
+        }
+
         viewModel.signInFormResponseState.onEach {
             when (it) {
                 is SignInFormResponseState.EmailIsEmpty -> {
