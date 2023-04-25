@@ -46,8 +46,13 @@ class RepositoryImp(
     // ----------remote------------
 
     override suspend fun getBaseAppResponse() = safeAPIResult(remoteDataSource.getBaseAppResponse())
-    override suspend fun getDiscoverMovies(sortBy: String) = safeAPIResult(remoteDataSource.getDiscoverMovies(sortBy))
-    override suspend fun getDiscoverTvShows(sortBy: String) = safeAPIResult(remoteDataSource.getDiscoverTvShows(sortBy))
+    override suspend fun getPopularMovies() = safeAPIResult(remoteDataSource.getPopularMovies())
+    override suspend fun getPopularTvShows() = safeAPIResult(remoteDataSource.getPopularTvShows())
+    override suspend fun getDiscoverMovies(sortBy: String) =
+        safeAPIResult(remoteDataSource.getDiscoverMovies(sortBy))
+
+    override suspend fun getDiscoverTvShows(sortBy: String) =
+        safeAPIResult(remoteDataSource.getDiscoverTvShows(sortBy))
 
     // ---------- end remote------------
 

@@ -8,7 +8,7 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE email = :email")
     fun getAllMatchedUser(email: String): List<User>
 
-    @Insert
-    fun addUser(user:User): Long
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addUser(user: User): Long
 
 }
