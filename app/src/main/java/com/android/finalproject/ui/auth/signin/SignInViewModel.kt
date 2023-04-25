@@ -1,5 +1,6 @@
 package com.android.finalproject.ui.auth.signin
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.finalproject.data.SessionManager
 import com.android.finalproject.data.model.User
@@ -15,6 +16,7 @@ class SignInViewModel(private val repository: Repository) : BaseViewModel() {
     private var _signInFormResponseState = Channel<SignInFormResponseState>(Channel.BUFFERED)
     val signInFormResponseState get() = _signInFormResponseState.receiveAsFlow()
 
+    var str: MutableLiveData<String>?= null
 
     private var _signInResponseState = Channel<SignInResponseState>(Channel.BUFFERED)
     val signInResponseState get() = _signInResponseState.receiveAsFlow()
@@ -23,7 +25,9 @@ class SignInViewModel(private val repository: Repository) : BaseViewModel() {
     fun signIn(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
             if (email.isNullOrEmpty()) _signInFormResponseState.trySend(SignInFormResponseState.EmailIsEmpty)
-            else if (password.isNullOrEmpty()) _signInFormResponseState.trySend(SignInFormResponseState.PasswordIsEmpty)
+            else if (password.isNullOrEmpty()) _signInFormResponseState.trySend(
+                SignInFormResponseState.PasswordIsEmpty
+            )
             else _signInFormResponseState.trySend(SignInFormResponseState.Proceed(email, password))
         }
     }

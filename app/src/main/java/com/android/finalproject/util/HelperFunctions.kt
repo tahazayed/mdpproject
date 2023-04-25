@@ -12,9 +12,9 @@ import android.net.Uri
 import android.os.Vibrator
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Patterns
 import androidx.appcompat.app.AlertDialog
 import com.android.finalproject.data.model.APIError
-
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -23,8 +23,15 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.*
 import java.text.DecimalFormat
 import java.util.*
+import java.util.regex.Pattern
+
 
 object HelperFunctions {
+
+    fun isValidEmail(email: String): Boolean {
+        val pattern: Pattern = Patterns.EMAIL_ADDRESS
+        return pattern.matcher(email).matches()
+    }
 
     fun getAppVersion(context: Context): String {
         val packageInfo: PackageInfo

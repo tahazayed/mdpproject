@@ -32,5 +32,8 @@
     <string name="last_name">Last name*</string>
     <string name="create_account">Create Account</string>
     <string name="invalid_credentials">Invalid Email Or Password!</string>
+    <string name="invalid_email">Invalid Email Format</string>
     <string name="can_not_be_empty">Can\'t be Empty</string>
+    <string name="discover_movies">Discover Movies</string>
+    <string name="discover_series">Discover Tv Shows</string>
 </resources>

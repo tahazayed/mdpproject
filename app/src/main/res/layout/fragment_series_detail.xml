@@ -1,14 +1,117 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.seriesscreen.SeriesDetailFragment">
+    android:layout_height="wrap_content"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/movie_poster"
+        android:layout_width="wrap_content"
+        android:layout_height="270dp"
+        android:src="@drawable/movie_poster"
+        android:layout_centerHorizontal="true"
+        android:background="@color/black"
+        />
+
+    <RelativeLayout
+        android:id="@+id/showDescription"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_below="@id/movie_poster"
+        >
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="Movie Title"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            />
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/movie_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movie_title"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="18sp"
+            android:text="Release Date (2023)"
+            android:gravity="center_horizontal"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:text="watch Trailer"
+            android:layout_below="@id/movie_title"
+            android:layout_toRightOf="@id/movie_release_date"
+            android:layout_toLeftOf="@id/original_language"
+            />
+
+        <TextView
+            android:id="@+id/original_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movie_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:text="English"
+            />
+
+        <TextView
+            android:id="@+id/movie_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movie_release_date"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            android:maxLines="16"
+            android:scrollbars="vertical"
+            />
+
+        <TextView
+            android:id="@+id/movie_vote_average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movie_overview"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:text="Vote Average"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/movie_popularity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movie_overview"
+            android:layout_toRightOf="@+id/movie_vote_average"
+            android:layout_toLeftOf="@+id/adult_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Popularity"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/adult_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movie_overview"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:text="Adult/FamilyFriendly"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+</RelativeLayout>
