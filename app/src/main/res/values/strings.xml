@@ -48,4 +48,7 @@
     <string name="favorite_movies">Favorite Movies</string>
     <string name="sort_by">Sort By</string>
     <string name="account_overview">Account overview</string>
+    <string name="email">Email :</string>
+    <string name="sign_out">Sign out</string>
+    <string name="delete_account">Delete Account</string>
 </resources>
