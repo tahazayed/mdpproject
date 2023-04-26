@@ -55,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/registration_form_background"
+            android:inputType="textPersonName"
             android:padding="12dp" />
 
 
@@ -72,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/registration_form_background"
+            android:inputType="textEmailAddress"
             android:padding="12dp" />
 
 
@@ -89,6 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/registration_form_background"
+            android:inputType="textPassword"
             android:padding="12dp" />
 
 

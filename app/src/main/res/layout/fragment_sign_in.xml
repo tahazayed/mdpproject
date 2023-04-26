@@ -48,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/registration_form_background"
-            android:padding="12dp" />
+            android:padding="12dp"
+            android:inputType="textEmailAddress"/>
 
 
         <TextView
@@ -66,7 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/registration_form_background"
-            android:padding="12dp" />
+            android:padding="12dp"
+            android:inputType="textPassword"/>
 
 
         <TextView
