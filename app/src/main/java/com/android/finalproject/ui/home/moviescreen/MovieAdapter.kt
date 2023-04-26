@@ -12,7 +12,7 @@ import com.android.finalproject.util.Constants
 import com.bumptech.glide.Glide
 
 class MovieAdapter(
-    private var dataSet: ArrayList<Movie> = arrayListOf(),
+    private var dataSet: List<Movie> = arrayListOf(),
     private var favSet: ArrayList<Movie> = arrayListOf(),
     private val context: Context
 ) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
@@ -76,8 +76,9 @@ class MovieAdapter(
     }
 
     fun setData(dataSet: List<Movie>, favSet: List<Movie>) {
-        this.dataSet = dataSet as ArrayList<Movie>
-        this.favSet = favSet as ArrayList<Movie>
+
+        this.dataSet = dataSet
+        this.favSet = ArrayList(favSet)
 
         notifyDataSetChanged()
     }

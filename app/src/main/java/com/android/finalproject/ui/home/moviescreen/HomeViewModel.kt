@@ -41,12 +41,25 @@ class HomeViewModel(
                 is APIResult.Success -> {
                     _movieListResponseState.trySend(MovieListResponseState.Loading(false))
                     response.body?.let {
-                        _movieListResponseState.trySend(MovieListResponseState.Success(it, favList))
+                        _movieListResponseState.trySend(MovieListResponseState.Success(it.results, favList))
                     }
                 }
             }
         }
     }
+
+    fun getFavMovie(sort: String) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+
+            _movieListResponseState.trySend(MovieListResponseState.Loading(true))
+
+            val favList = repository.getFavMovieList()
+            _movieListResponseState.trySend(MovieListResponseState.Loading(false))
+            _movieListResponseState.trySend(MovieListResponseState.Success(favList, favList))
+
+        }
+    }
+
 
     fun getDiscoverSeries(sort: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
@@ -69,13 +82,25 @@ class HomeViewModel(
                     response.body?.let {
                         _seriesListResponseState.trySend(
                             SeriesListResponseState.Success(
-                                it,
+                                it.results,
                                 favList
                             )
                         )
                     }
                 }
             }
+        }
+    }
+
+    fun getFavSeries(sort: String) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+
+            _seriesListResponseState.trySend(SeriesListResponseState.Loading(true))
+
+            val favList = repository.getFavSeriesList()
+            _seriesListResponseState.trySend(SeriesListResponseState.Loading(false))
+            _seriesListResponseState.trySend(SeriesListResponseState.Success(favList, favList))
+
         }
     }
 

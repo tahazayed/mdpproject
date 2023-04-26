@@ -65,7 +65,7 @@ class MovieListFragment :
                         viewModel.getDiscoverMovie(Constants.MOVIE_COMING_SOON)
                     }
                     3 -> {
-                        viewModel.getDiscoverMovie(Constants.MOVIE_FAVORITE)
+                        viewModel.getFavMovie(Constants.MOVIE_FAVORITE)
                     }
                 }
             }
@@ -91,7 +91,7 @@ class MovieListFragment :
                         dismissDialog()
                 }
                 is MovieListResponseState.Success -> {
-                    adapter.setData(it.response.results, it.favList)
+                    adapter.setData(it.movieList, it.favList)
                     adapter.onItemClick = { movie ->
                         showMovieDetailsScreen(movie)
                     }

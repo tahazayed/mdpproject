@@ -47,4 +47,5 @@
     <string name="favorite_series">Favorite Series</string>
     <string name="favorite_movies">Favorite Movies</string>
     <string name="sort_by">Sort By</string>
+    <string name="account_overview">Account overview</string>
 </resources>

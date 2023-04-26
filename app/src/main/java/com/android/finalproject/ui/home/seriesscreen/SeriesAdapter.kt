@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.android.finalproject.R
-import com.android.finalproject.data.model.Movie
 import com.android.finalproject.data.model.TvShow
 import com.android.finalproject.databinding.SeriesItemBinding
 import com.android.finalproject.util.Constants
@@ -79,8 +78,8 @@ class SeriesAdapter(
     }
 
     fun setData(dataSet: List<TvShow>, favSet: List<TvShow>) {
-        this.dataSet = dataSet as ArrayList<TvShow>
-        this.favSet = favSet as ArrayList<TvShow>
+        this.dataSet = dataSet
+        this.favSet = ArrayList(favSet)
 
         notifyDataSetChanged()
     }

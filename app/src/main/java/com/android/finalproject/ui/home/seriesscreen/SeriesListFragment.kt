@@ -66,7 +66,7 @@ class SeriesListFragment :
                         viewModel.getDiscoverSeries(Constants.SERIES_COMING_SOON)
                     }
                     3 -> {
-                        viewModel.getDiscoverSeries(Constants.SERIES_FAVORITE)
+                        viewModel.getFavSeries(Constants.SERIES_FAVORITE)
                     }
                 }
             }
@@ -92,7 +92,7 @@ class SeriesListFragment :
                         dismissDialog()
                 }
                 is SeriesListResponseState.Success -> {
-                    adapter.setData(it.response.results, it.favList)
+                    adapter.setData(it.seriesList, it.favList)
                     adapter.onItemClick = { series ->
                         showSeriesDetailsScreen(series)
                     }
