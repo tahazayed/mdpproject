@@ -1,4 +1,11 @@
 <resources>
+    <string-array name="sort">
+        <item name="most_pop">Most Popular</item>
+        <item name="top_rated">Top Rated</item>
+        <item name="new_releases">Coming Soon</item>
+        <item name="favorite">Favorite</item>
+    </string-array>
+
     <string name="app_name">Movie App</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

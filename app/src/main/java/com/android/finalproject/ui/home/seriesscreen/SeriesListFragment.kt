@@ -13,6 +13,7 @@ import com.android.finalproject.data.model.TvShow
 import com.android.finalproject.databinding.FragmentSeriesListBinding
 import com.android.finalproject.ui.base.BaseViewModelFragment
 import com.android.finalproject.ui.home.moviescreen.HomeViewModel
+import com.android.finalproject.util.Constants
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -37,13 +38,12 @@ class SeriesListFragment :
 
     override fun initViews() {
         super.initViews()
-        viewModel.getDiscoverSeries()
 
         val sprAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(
                 requireContext(),
                 android.R.layout.simple_list_item_1,
-                arrayOf("Most Pop", "Top Rated", "New Release", "Favorite")
+                resources.getStringArray(R.array.sort)
             )
 
         binding.sprSortBy.adapter = sprAdapter
@@ -57,16 +57,16 @@ class SeriesListFragment :
             ) {
                 when (position) {
                     0 -> {
-                        Toast.makeText(requireContext(), "0", Toast.LENGTH_SHORT).show()
+                        viewModel.getDiscoverSeries(Constants.SERIES_MOST_POPULAR)
                     }
                     1 -> {
-                        Toast.makeText(requireContext(), "1", Toast.LENGTH_SHORT).show()
+                        viewModel.getDiscoverSeries(Constants.SERIES_TOP_RATED)
                     }
                     2 -> {
-                        Toast.makeText(requireContext(), "2", Toast.LENGTH_SHORT).show()
+                        viewModel.getDiscoverSeries(Constants.SERIES_COMING_SOON)
                     }
                     3 -> {
-                        Toast.makeText(requireContext(), "3", Toast.LENGTH_SHORT).show()
+                        viewModel.getDiscoverSeries(Constants.SERIES_FAVORITE)
                     }
                 }
             }

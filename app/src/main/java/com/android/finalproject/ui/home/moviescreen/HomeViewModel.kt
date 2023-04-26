@@ -22,13 +22,13 @@ class HomeViewModel(
     private var _seriesListResponseState = Channel<SeriesListResponseState>(Channel.BUFFERED)
     val seriesListResponseState get() = _seriesListResponseState.receiveAsFlow()
 
-    fun getDiscoverMovie() {
+    fun getDiscoverMovie(sort: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
 
             val favList = repository.getFavMovieList()
 
             _movieListResponseState.trySend(MovieListResponseState.Loading(true))
-            val response = repository.getDiscoverMovies("popularity.desc")
+            val response = repository.getDiscoverMovies(sort)
 
             when (response) {
                 is APIResult.Failure -> {
@@ -48,13 +48,13 @@ class HomeViewModel(
         }
     }
 
-    fun getDiscoverSeries() {
+    fun getDiscoverSeries(sort: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
             val favList = repository.getFavSeriesList()
 
 
             _seriesListResponseState.trySend(SeriesListResponseState.Loading(true))
-            val response = repository.getDiscoverTvShows("popularity.desc")
+            val response = repository.getDiscoverTvShows(sort)
 
             when (response) {
                 is APIResult.Failure -> {
@@ -67,7 +67,12 @@ class HomeViewModel(
                 is APIResult.Success -> {
                     _seriesListResponseState.trySend(SeriesListResponseState.Loading(false))
                     response.body?.let {
-                        _seriesListResponseState.trySend(SeriesListResponseState.Success(it, favList))
+                        _seriesListResponseState.trySend(
+                            SeriesListResponseState.Success(
+                                it,
+                                favList
+                            )
+                        )
                     }
                 }
             }
