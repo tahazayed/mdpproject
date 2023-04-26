@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.android.finalproject.R
 import com.android.finalproject.data.model.TvShow
 import com.android.finalproject.databinding.FragmentSeriesListBinding
@@ -107,7 +108,11 @@ class SeriesListFragment :
     }
 
     private fun showSeriesDetailsScreen(series: TvShow) {
-
+        findNavController().navigate(
+            SeriesListFragmentDirections.actionSeriesListFragmentToSeriesDetailFragment(
+                series
+            )
+        )
     }
 
 }

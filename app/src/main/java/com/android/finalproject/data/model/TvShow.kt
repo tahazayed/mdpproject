@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "series")
 data class TvShow(
-    val backdrop_path: String,
+    val backdrop_path: String?,
     val first_air_date: String,
     @PrimaryKey
     val id: Int,
