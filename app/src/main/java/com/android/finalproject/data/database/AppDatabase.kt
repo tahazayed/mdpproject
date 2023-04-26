@@ -16,6 +16,8 @@ import com.android.finalproject.data.model.User
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun movieDao(): MovieDao
+    abstract fun seriesDao(): SeriesDao
 
     companion object {
         private const val DB_NAME = "movie_app.db"

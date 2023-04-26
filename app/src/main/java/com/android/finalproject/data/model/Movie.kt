@@ -2,14 +2,19 @@ package com.android.finalproject.data.model
 
 import android.os.Parcelable
 import androidx.annotation.Keep
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
+@Entity(tableName = "movie")
 data class Movie(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,
+    @PrimaryKey
     val id: Int,
     val original_language: String,
     val original_title: String,
