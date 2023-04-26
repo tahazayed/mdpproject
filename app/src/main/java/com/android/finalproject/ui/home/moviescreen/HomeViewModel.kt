@@ -41,7 +41,12 @@ class HomeViewModel(
                 is APIResult.Success -> {
                     _movieListResponseState.trySend(MovieListResponseState.Loading(false))
                     response.body?.let {
-                        _movieListResponseState.trySend(MovieListResponseState.Success(it.results, favList))
+                        _movieListResponseState.trySend(
+                            MovieListResponseState.Success(
+                                it.results,
+                                favList
+                            )
+                        )
                     }
                 }
             }
@@ -50,13 +55,10 @@ class HomeViewModel(
 
     fun getFavMovie(sort: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
-
             _movieListResponseState.trySend(MovieListResponseState.Loading(true))
-
             val favList = repository.getFavMovieList()
             _movieListResponseState.trySend(MovieListResponseState.Loading(false))
             _movieListResponseState.trySend(MovieListResponseState.Success(favList, favList))
-
         }
     }
 
@@ -94,9 +96,7 @@ class HomeViewModel(
 
     fun getFavSeries(sort: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
-
             _seriesListResponseState.trySend(SeriesListResponseState.Loading(true))
-
             val favList = repository.getFavSeriesList()
             _seriesListResponseState.trySend(SeriesListResponseState.Loading(false))
             _seriesListResponseState.trySend(SeriesListResponseState.Success(favList, favList))

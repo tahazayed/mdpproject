@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.android.finalproject.R
+import com.android.finalproject.data.model.Movie
+import com.android.finalproject.data.model.TvShow
 import com.android.finalproject.databinding.FragmentProfileBinding
 import com.android.finalproject.ui.base.BaseViewModelFragment
 import com.android.finalproject.ui.home.moviescreen.HomeViewModel
+import com.android.finalproject.ui.home.moviescreen.MovieAdapter
 import com.android.finalproject.ui.home.moviescreen.MovieListResponseState
+import com.android.finalproject.ui.home.seriesscreen.SeriesAdapter
 import com.android.finalproject.ui.home.seriesscreen.SeriesListResponseState
 import com.android.finalproject.util.Constants
 import kotlinx.coroutines.flow.launchIn
@@ -21,6 +25,15 @@ class ProfileFragment :
     BaseViewModelFragment<HomeViewModel, FragmentProfileBinding>(
         HomeViewModel::class
     ) {
+
+    private val movieAdapter: ProfileMovieAdapter by lazy {
+        ProfileMovieAdapter(context = requireContext())
+    }
+
+    private val seriesAdapter: ProfileSeriesAdapter by lazy {
+        ProfileSeriesAdapter(context = requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,11 +42,10 @@ class ProfileFragment :
         return binding.root
     }
 
-
     override fun initViews() {
         super.initViews()
         viewModel.getFavSeries(Constants.SERIES_FAVORITE)
-        viewModel.getFavMovie(Constants.SERIES_FAVORITE)
+        viewModel.getFavMovie(Constants.MOVIE_FAVORITE)
     }
 
     override fun initObservers() {
@@ -51,13 +63,11 @@ class ProfileFragment :
                         dismissDialog()
                 }
                 is MovieListResponseState.Success -> {
-                    Toast.makeText(requireContext(), "movies fetched", Toast.LENGTH_SHORT).show()
-
-//                    adapter.setData(it.movieList, it.favList)
-//                    adapter.onItemClick = { movie ->
-//                        showMovieDetailsScreen(movie)
-//                    }
-//                    binding.rvMovies.adapter = adapter
+                    movieAdapter.setData(it.movieList)
+                    movieAdapter.onItemClick = { movie ->
+                        showMovieDetailsScreen(movie)
+                    }
+                    binding.rvMovies.adapter = movieAdapter
                 }
             }
         }.launchIn(lifecycleScope)
@@ -74,14 +84,22 @@ class ProfileFragment :
                         dismissDialog()
                 }
                 is SeriesListResponseState.Success -> {
-                    Toast.makeText(requireContext(), "tv shows fetched", Toast.LENGTH_SHORT).show()
-//                    adapter.setData(it.seriesList, it.favList)
-//                    adapter.onItemClick = { series ->
-//                        showSeriesDetailsScreen(series)
-//                    }
-//                    binding.rvSeries.adapter = adapter
+                    seriesAdapter.setData(it.seriesList)
+                    seriesAdapter.onItemClick = { series ->
+                        showSeriesDetailsScreen(series)
+                    }
+                    binding.rvMovies.adapter = seriesAdapter
+
                 }
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun showMovieDetailsScreen(movie: Movie) {
+
+    }
+
+    private fun showSeriesDetailsScreen(series: TvShow) {
+
     }
 }

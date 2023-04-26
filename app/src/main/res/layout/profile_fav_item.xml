@@ -9,7 +9,7 @@
     android:paddingHorizontal="@dimen/_4sdp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_movie_poster"
+        android:id="@+id/iv_poster"
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_85sdp"
         android:scaleType="fitCenter" />

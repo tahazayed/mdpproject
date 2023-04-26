@@ -108,7 +108,7 @@
                 android:layout_marginBottom="@dimen/_6sdp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/profile_movie_item" />
+                tools:listitem="@layout/profile_fav_item" />
 
         </LinearLayout>
 
@@ -139,7 +139,7 @@
                 android:layout_marginBottom="@dimen/_6sdp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/profile_movie_item" />
+                tools:listitem="@layout/profile_fav_item" />
 
         </LinearLayout>
 
