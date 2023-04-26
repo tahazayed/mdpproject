@@ -24,6 +24,7 @@
         android:paddingBottom="@dimen/_12sdp"
         android:layout_marginBottom="@dimen/_36sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/movie_item" />
+        tools:listitem="@layout/movie_item"
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
