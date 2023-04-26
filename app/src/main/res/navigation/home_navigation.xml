@@ -35,11 +35,19 @@
         android:id="@+id/movieDetailFragment"
         android:name="com.android.finalproject.ui.home.moviescreen.MovieDetailFragment"
         android:label="fragment_movie_detail"
-        tools:layout="@layout/fragment_movie_detail" />
+        tools:layout="@layout/fragment_movie_detail" >
+        <argument
+            android:name="movie"
+            app:argType="com.android.finalproject.data.model.Movie" />
+    </fragment>
 
     <fragment
         android:id="@+id/seriesDetailFragment"
         android:name="com.android.finalproject.ui.home.seriesscreen.SeriesDetailFragment"
         android:label="fragment_series_detail"
-        tools:layout="@layout/fragment_series_detail" />
+        tools:layout="@layout/fragment_series_detail" >
+        <argument
+            android:name="series"
+            app:argType="com.android.finalproject.data.model.TvShow" />
+    </fragment>
 </navigation>
