@@ -83,7 +83,7 @@ class SignUpFragment : BaseViewModelFragment<SignUpViewModel, FragmentSignUpBind
                 SignUpResponseState.Failure -> {
                     Toast.makeText(
                         requireContext(),
-                        "Email Already Registered.",
+                        getString(R.string.email_already_registered),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

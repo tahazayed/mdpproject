@@ -1,35 +1,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/movie_poster"
         android:layout_width="wrap_content"
         android:layout_height="270dp"
-        android:src="@drawable/movie_poster"
         android:layout_centerHorizontal="true"
         android:background="@color/black"
-        />
+        android:src="@drawable/movie_poster" />
 
     <RelativeLayout
         android:id="@+id/showDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
         android:layout_below="@id/movie_poster"
-        >
+        android:padding="15dp">
+
         <TextView
             android:id="@+id/movie_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="Movie Title"
             android:gravity="center_horizontal"
+            android:paddingTop="16dp"
+            android:text="Movie Title"
             android:textColor="@color/black"
-            />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/movie_release_date"
@@ -38,18 +35,17 @@
             android:layout_below="@+id/movie_title"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
-            android:textSize="18sp"
+            android:gravity="center_horizontal"
             android:text="Release Date (2023)"
-            android:gravity="center_horizontal"/>
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="40sp"
-            android:text="watch Trailer"
             android:layout_below="@id/movie_title"
-            android:layout_toRightOf="@id/movie_release_date"
             android:layout_toLeftOf="@id/original_language"
-            />
+            android:layout_toRightOf="@id/movie_release_date"
+            android:text="watch Trailer" />
 
         <TextView
             android:id="@+id/original_language"
@@ -58,10 +54,9 @@
             android:layout_below="@+id/movie_title"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="16dp"
-            android:textSize="18sp"
             android:layout_marginTop="8dp"
             android:text="English"
-            />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/movie_overview"
@@ -69,11 +64,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/movie_release_date"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             android:maxLines="16"
             android:scrollbars="vertical"
-            />
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/movie_vote_average"
@@ -81,25 +75,24 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/movie_overview"
             android:layout_marginTop="8dp"
-            android:textSize="18sp"
             android:text="Vote Average"
-            android:textStyle="bold"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/movie_popularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/movie_overview"
-            android:layout_toRightOf="@+id/movie_vote_average"
-            android:layout_toLeftOf="@+id/adult_content"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="16dp"
-            android:textSize="18sp"
             android:layout_marginTop="8dp"
+            android:layout_toLeftOf="@+id/adult_content"
+            android:layout_toRightOf="@+id/movie_vote_average"
             android:gravity="center"
             android:text="Popularity"
-            android:textStyle="bold"
-            />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/adult_content"
@@ -108,10 +101,10 @@
             android:layout_below="@+id/movie_overview"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="16dp"
-            android:textSize="18sp"
             android:layout_marginTop="8dp"
             android:text="Adult/FamilyFriendly"
-            android:textStyle="bold"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </RelativeLayout>
