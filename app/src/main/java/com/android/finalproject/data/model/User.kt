@@ -12,7 +12,7 @@ import org.checkerframework.common.aliasing.qual.Unique
 @Parcelize
 data class User(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    var id: Int = 0,
     val name: String = "",
     @ColumnInfo(name = "email")
     val email: String,

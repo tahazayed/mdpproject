@@ -15,4 +15,7 @@ interface DbDataSource {
     suspend fun getFavSeriesList(): List<TvShow>
     suspend fun addSeriesToFav(series: TvShow): Long
     suspend fun removeSeriesFromFav(series: TvShow): Int
+    suspend fun deleteMyAccount(user: User): Int
+
+    suspend fun deleteAllFav()
 }

@@ -1,9 +1,12 @@
 package com.android.finalproject.ui.home.moviescreen
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.android.finalproject.data.SessionManager
 import com.android.finalproject.data.model.APIResult
 import com.android.finalproject.data.model.Movie
 import com.android.finalproject.data.model.TvShow
+import com.android.finalproject.data.model.User
 import com.android.finalproject.data.repositories.Repository
 import com.android.finalproject.ui.base.BaseViewModel
 import com.android.finalproject.ui.home.seriesscreen.SeriesListResponseState
@@ -21,6 +24,8 @@ class HomeViewModel(
 
     private var _seriesListResponseState = Channel<SeriesListResponseState>(Channel.BUFFERED)
     val seriesListResponseState get() = _seriesListResponseState.receiveAsFlow()
+
+    val user = MutableLiveData<User>()
 
     fun getDiscoverMovie(sort: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
@@ -55,9 +60,7 @@ class HomeViewModel(
 
     fun getFavMovie(sort: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
-            _movieListResponseState.trySend(MovieListResponseState.Loading(true))
             val favList = repository.getFavMovieList()
-            _movieListResponseState.trySend(MovieListResponseState.Loading(false))
             _movieListResponseState.trySend(MovieListResponseState.Success(favList, favList))
         }
     }
@@ -96,9 +99,7 @@ class HomeViewModel(
 
     fun getFavSeries(sort: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
-            _seriesListResponseState.trySend(SeriesListResponseState.Loading(true))
             val favList = repository.getFavSeriesList()
-            _seriesListResponseState.trySend(SeriesListResponseState.Loading(false))
             _seriesListResponseState.trySend(SeriesListResponseState.Success(favList, favList))
 
         }
@@ -121,4 +122,27 @@ class HomeViewModel(
                 repository.removeSeriesFromFav(series)
         }
     }
+
+    fun getProfileInfo() {
+        user.postValue(SessionManager.getInstance(repository)?.current())
+    }
+
+    fun signOut() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllFav()
+            repository.logOut()
+        }
+    }
+
+    fun deleteMyAccount() {
+        viewModelScope.launch(Dispatchers.IO) {
+            SessionManager.getInstance(repository)?.current()?.let { user ->
+                repository.deleteMyAccount(user)
+            }
+            repository.deleteAllFav()
+            repository.logOut()
+        }
+    }
+
+
 }
