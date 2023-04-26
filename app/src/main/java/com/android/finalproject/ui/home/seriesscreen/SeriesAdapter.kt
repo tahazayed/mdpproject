@@ -3,18 +3,23 @@ package com.android.finalproject.ui.home.seriesscreen
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.android.finalproject.R
+import com.android.finalproject.data.model.Movie
 import com.android.finalproject.data.model.TvShow
 import com.android.finalproject.databinding.SeriesItemBinding
 import com.android.finalproject.util.Constants
 import com.bumptech.glide.Glide
 
 class SeriesAdapter(
-    private var dataSet: List<TvShow> = arrayListOf(), private val context: Context
+    private var dataSet: List<TvShow> = arrayListOf(),
+    private var favSet: ArrayList<TvShow> = arrayListOf(),
+    private val context: Context
 ) : RecyclerView.Adapter<SeriesAdapter.ViewHolder>() {
 
     lateinit var onItemClick: (TvShow) -> Unit
+    lateinit var onItemFavClick: (TvShow, Boolean) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -33,19 +38,50 @@ class SeriesAdapter(
             .load(Constants.POSTER_PATH_PRE_URL + tvShow.poster_path)
             .placeholder(R.drawable.ic_movie)
             .centerCrop()
-            .into(holder.binding.ivMoviePoster)
+            .into(holder.binding.ivSeriesPoster)
 
-        holder.binding.root.setOnClickListener {
+        if (favSet.contains(tvShow))
+            holder.binding.ivAddToFav.background =
+                AppCompatResources.getDrawable(context, R.drawable.ic_added_to_fav)
+        else
+            holder.binding.ivAddToFav.background =
+                AppCompatResources.getDrawable(context, R.drawable.ic_removed_from_fav)
+
+
+        holder.binding.ivSeriesPoster.setOnClickListener {
             onItemClick.invoke(tvShow)
         }
+
+        holder.binding.llSeriesDetails.setOnClickListener {
+            onItemClick.invoke(tvShow)
+        }
+
+        holder.binding.ivAddToFav.setOnClickListener {
+            if (favSet.contains(tvShow)) {
+                onItemFavClick.invoke(tvShow, false)
+                holder.binding.ivAddToFav.background =
+                    AppCompatResources.getDrawable(context, R.drawable.ic_removed_from_fav)
+                favSet.remove(tvShow)
+
+            } else {
+                onItemFavClick.invoke(tvShow, true)
+                holder.binding.ivAddToFav.background =
+                    AppCompatResources.getDrawable(context, R.drawable.ic_added_to_fav)
+                favSet.add(tvShow)
+            }
+        }
+
+
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
     }
 
-    fun setData(dataSet: List<TvShow>) {
-        this.dataSet = dataSet
+    fun setData(dataSet: List<TvShow>, favSet: List<TvShow>) {
+        this.dataSet = dataSet as ArrayList<TvShow>
+        this.favSet = favSet as ArrayList<TvShow>
+
         notifyDataSetChanged()
     }
 

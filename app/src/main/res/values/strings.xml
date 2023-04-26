@@ -39,4 +39,5 @@
     <string name="email_already_registered">Email Already Registered.</string>
     <string name="favorite_series">Favorite Series</string>
     <string name="favorite_movies">Favorite Movies</string>
+    <string name="sort_by">Sort By</string>
 </resources>

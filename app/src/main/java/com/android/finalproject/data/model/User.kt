@@ -19,7 +19,6 @@ data class User(
     val password: String
 ) : Parcelable {
 
-
     override fun equals(other: Any?): Boolean {
         val user = other as User
 

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.android.finalproject.R
@@ -36,6 +38,43 @@ class SeriesListFragment :
     override fun initViews() {
         super.initViews()
         viewModel.getDiscoverSeries()
+
+        val sprAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                arrayOf("Most Pop", "Top Rated", "New Release", "Favorite")
+            )
+
+        binding.sprSortBy.adapter = sprAdapter
+
+        binding.sprSortBy.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    0 -> {
+                        Toast.makeText(requireContext(), "0", Toast.LENGTH_SHORT).show()
+                    }
+                    1 -> {
+                        Toast.makeText(requireContext(), "1", Toast.LENGTH_SHORT).show()
+                    }
+                    2 -> {
+                        Toast.makeText(requireContext(), "2", Toast.LENGTH_SHORT).show()
+                    }
+                    3 -> {
+                        Toast.makeText(requireContext(), "3", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+        }
     }
 
     override fun initObservers() {
@@ -53,9 +92,12 @@ class SeriesListFragment :
                         dismissDialog()
                 }
                 is SeriesListResponseState.Success -> {
-                    adapter.setData(it.response.results)
+                    adapter.setData(it.response.results, it.favList)
                     adapter.onItemClick = { series ->
                         showSeriesDetailsScreen(series)
+                    }
+                    adapter.onItemFavClick = { favSeries, addToFav ->
+                        viewModel.updateFavItem(favSeries, addToFav)
                     }
                     binding.rvSeries.adapter = adapter
                 }
