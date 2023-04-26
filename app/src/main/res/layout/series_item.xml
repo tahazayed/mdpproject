@@ -6,10 +6,10 @@
     android:layout_margin="@dimen/_4sdp"
     android:background="@drawable/rounded_corner_rv_item_bacckground"
     android:orientation="horizontal"
-    android:paddingHorizontal="@dimen/_16sdp">
+    android:paddingHorizontal="@dimen/_8sdp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_movie_poster"
+        android:id="@+id/iv_series_poster"
         android:layout_width="0dp"
         android:layout_height="@dimen/_80sdp"
         android:layout_margin="@dimen/_12sdp"
@@ -17,6 +17,7 @@
         android:scaleType="fitCenter" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_series_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_12sdp"
@@ -51,5 +52,14 @@
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/iv_add_to_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/ic_removed_from_fav"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:padding="@dimen/_12sdp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

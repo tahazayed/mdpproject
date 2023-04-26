@@ -3,6 +3,7 @@ package com.android.finalproject.ui.home.moviescreen
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.android.finalproject.R
 import com.android.finalproject.data.model.Movie
@@ -11,10 +12,13 @@ import com.android.finalproject.util.Constants
 import com.bumptech.glide.Glide
 
 class MovieAdapter(
-    private var dataSet: List<Movie> = arrayListOf(), private val context: Context
+    private var dataSet: ArrayList<Movie> = arrayListOf(),
+    private var favSet: ArrayList<Movie> = arrayListOf(),
+    private val context: Context
 ) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     lateinit var onItemClick: (Movie) -> Unit
+    lateinit var onItemFavClick: (Movie, Boolean) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -35,8 +39,35 @@ class MovieAdapter(
             .centerCrop()
             .into(holder.binding.ivMoviePoster)
 
-        holder.binding.root.setOnClickListener {
+        if (favSet.contains(movie))
+            holder.binding.ivAddToFav.background =
+                AppCompatResources.getDrawable(context, R.drawable.ic_added_to_fav)
+        else
+            holder.binding.ivAddToFav.background =
+                AppCompatResources.getDrawable(context, R.drawable.ic_removed_from_fav)
+
+
+        holder.binding.llMovieDetails.setOnClickListener {
             onItemClick.invoke(movie)
+        }
+
+        holder.binding.ivMoviePoster.setOnClickListener {
+            onItemClick.invoke(movie)
+        }
+
+        holder.binding.ivAddToFav.setOnClickListener {
+            if (favSet.contains(movie)) {
+                onItemFavClick.invoke(movie, false)
+                holder.binding.ivAddToFav.background =
+                    AppCompatResources.getDrawable(context, R.drawable.ic_removed_from_fav)
+                favSet.remove(movie)
+
+            } else {
+                onItemFavClick.invoke(movie, true)
+                holder.binding.ivAddToFav.background =
+                    AppCompatResources.getDrawable(context, R.drawable.ic_added_to_fav)
+                favSet.add(movie)
+            }
         }
     }
 
@@ -44,8 +75,10 @@ class MovieAdapter(
         return dataSet.size
     }
 
-    fun setData(dataSet: List<Movie>) {
-        this.dataSet = dataSet
+    fun setData(dataSet: List<Movie>, favSet: List<Movie>) {
+        this.dataSet = dataSet as ArrayList<Movie>
+        this.favSet = favSet as ArrayList<Movie>
+
         notifyDataSetChanged()
     }
 

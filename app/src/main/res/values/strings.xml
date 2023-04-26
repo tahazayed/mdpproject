@@ -37,4 +37,5 @@
     <string name="discover_movies">Discover Movies</string>
     <string name="discover_series">Discover Tv Shows</string>
     <string name="email_already_registered">Email Already Registered.</string>
+    <string name="sort_by">Sort By</string>
 </resources>
