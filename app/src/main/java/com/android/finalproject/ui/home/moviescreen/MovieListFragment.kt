@@ -9,6 +9,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.android.finalproject.R
 import com.android.finalproject.data.model.Movie
 import com.android.finalproject.databinding.FragmentMovieListBinding
@@ -47,7 +48,7 @@ class MovieListFragment :
 
         binding.sprSortBy.adapter = sprAdapter
 
-        binding.sprSortBy.onItemSelectedListener = object :OnItemSelectedListener{
+        binding.sprSortBy.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -106,6 +107,10 @@ class MovieListFragment :
     }
 
     private fun showMovieDetailsScreen(movie: Movie) {
-
+        findNavController().navigate(
+            MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
+                movie
+            )
+        )
     }
 }

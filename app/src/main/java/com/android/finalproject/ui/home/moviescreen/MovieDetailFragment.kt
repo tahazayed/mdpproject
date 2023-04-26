@@ -1,5 +1,7 @@
 package com.android.finalproject.ui.home.moviescreen
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +40,7 @@ class MovieDetailFragment :
 
     }
 
-    private fun fetishMovieIntoUi(){
+    private fun fetishMovieIntoUi() {
         setTitle()
         adultContentText()
         setLanguage()
@@ -57,7 +59,7 @@ class MovieDetailFragment :
 
     private fun adultContentText() {
         val adultContent = movie.adult
-        val adultContentViewText = binding.adultContent;
+        val adultContentViewText = binding.movieCategoryValue;
         if (adultContent) {
             adultContentViewText.text = "Adult"
         } else {
@@ -85,7 +87,7 @@ class MovieDetailFragment :
 
     private fun setPopularity() {
         val popularity = movie.popularity;
-        val popularityTextView = binding.moviePopularity
+        val popularityTextView = binding.moviePopularityValue
         popularityTextView.text = popularity?.toString();
     }
 
@@ -105,6 +107,15 @@ class MovieDetailFragment :
             .into(binding.moviePoster)
     }
 
+    private fun watchTrailerBn(){
+        binding.watchTrailerBtn.setOnClickListener {
+        }
+    }
 
+    private fun openYoutubeIntent(videoId : String){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$videoId"))
+        intent.putExtra("VIDEO_ID", videoId)
+        startActivity(intent)
+    }
 
 }
