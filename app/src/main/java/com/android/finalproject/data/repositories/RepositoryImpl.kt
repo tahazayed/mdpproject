@@ -46,8 +46,11 @@ class RepositoryImp(
     // ----------remote------------
 
     override suspend fun getBaseAppResponse() = safeAPIResult(remoteDataSource.getBaseAppResponse())
+
     override suspend fun getPopularMovies() = safeAPIResult(remoteDataSource.getPopularMovies())
+
     override suspend fun getPopularTvShows() = safeAPIResult(remoteDataSource.getPopularTvShows())
+
     override suspend fun getDiscoverMovies(sortBy: String) =
         safeAPIResult(remoteDataSource.getDiscoverMovies(sortBy))
 
@@ -67,6 +70,19 @@ class RepositoryImp(
     override suspend fun getAllMatchedUser(email: String) = dbDataSource.getAllMatchedUser(email)
 
     override suspend fun addUser(user: User) = dbDataSource.addUser(user)
+
+    override suspend fun getFavMovieList() = dbDataSource.getFavMovieList()
+
+    override suspend fun addMovieToFav(movie: Movie) = dbDataSource.addMovieToFav(movie)
+
+    override suspend fun removeMovieFromFav(movie: Movie) = dbDataSource.removeMovieFromFav(movie)
+
+    override suspend fun getFavSeriesList() = dbDataSource.getFavSeriesList()
+
+    override suspend fun addSeriesToFav(series: TvShow) = dbDataSource.addSeriesToFav(series)
+
+    override suspend fun removeSeriesFromFav(series: TvShow) =
+        dbDataSource.removeSeriesFromFav(series)
 
     // ---------- end database------------
 

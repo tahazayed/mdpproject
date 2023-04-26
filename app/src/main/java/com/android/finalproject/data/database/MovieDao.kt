@@ -12,5 +12,5 @@ interface MovieDao {
     fun addMovieToFav(movie: Movie): Long
 
     @Delete
-    fun removeMovieFromFav(movie: Movie): Long
+    fun removeMovieFromFav(movie: Movie): Int
 }

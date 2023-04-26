@@ -10,9 +10,9 @@ interface DbDataSource {
 
     suspend fun getFavMovieList(): List<Movie>
     suspend fun addMovieToFav(movie: Movie): Long
-    suspend fun removeMovieFromFav(movie: Movie): Long
+    suspend fun removeMovieFromFav(movie: Movie): Int
 
     suspend fun getFavSeriesList(): List<TvShow>
     suspend fun addSeriesToFav(series: TvShow): Long
-    suspend fun removeSeriesFromFav(series: TvShow): Long
+    suspend fun removeSeriesFromFav(series: TvShow): Int
 }

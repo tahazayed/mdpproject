@@ -12,5 +12,5 @@ interface SeriesDao {
     fun addSeriesToFav(series: TvShow): Long
 
     @Delete
-    fun removeSeriesFromFav(series: TvShow): Long
+    fun removeSeriesFromFav(series: TvShow): Int
 }
