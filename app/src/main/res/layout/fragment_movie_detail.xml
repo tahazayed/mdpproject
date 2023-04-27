@@ -39,7 +39,9 @@
             android:drawableEnd="@drawable/ic_rating"
             android:drawablePadding="@dimen/_4sdp"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
 
 
 
@@ -69,7 +71,10 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:text="English"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
 
 
         <TextView

@@ -25,7 +25,7 @@ class SeriesListFragment :
         HomeViewModel::class
     ) {
     private var position = 0
-
+    private var searched = false
     private val adapter: SeriesAdapter by lazy {
         SeriesAdapter(context = requireContext())
     }
@@ -60,12 +60,13 @@ class SeriesListFragment :
                 ).show()
                 return@setOnClickListener
             }
-
+            searched = true
             viewModel.searchForSeries(query)
         }
 
         binding.etQuery.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isEmpty()) {
+            if (text.toString().isEmpty() && searched) {
+                searched = false
                 fetchSeries(position)
             }
         }
@@ -94,12 +95,14 @@ class SeriesListFragment :
                 is SeriesListResponseState.Failure -> {
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
                 }
+
                 is SeriesListResponseState.Loading -> {
                     if (it.loading)
                         showDialog(getString(R.string.loading))
                     else
                         dismissDialog()
                 }
+
                 is SeriesListResponseState.Success -> {
                     adapter.setData(it.seriesList, it.favList)
                     adapter.onItemClick = { series ->
@@ -131,12 +134,15 @@ class SeriesListFragment :
             0 -> {
                 viewModel.getDiscoverSeries(Constants.SERIES_MOST_POPULAR)
             }
+
             1 -> {
                 viewModel.getDiscoverSeries(Constants.SERIES_TOP_RATED)
             }
+
             2 -> {
                 viewModel.getDiscoverSeries(Constants.SERIES_COMING_SOON)
             }
+
             3 -> {
                 viewModel.getFavSeries(Constants.SERIES_FAVORITE)
             }

@@ -8,5 +8,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class VideosList(
     val id: Int,
-    val results: List<Video>
+    val results: List<Video>?
 ) : Parcelable

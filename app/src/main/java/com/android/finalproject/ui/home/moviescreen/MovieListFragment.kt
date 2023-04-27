@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -25,7 +26,7 @@ class MovieListFragment :
         HomeViewModel::class
     ) {
     private var position = 0
-
+    private var searched = false
     private val adapter: MovieAdapter by lazy {
         MovieAdapter(context = requireContext())
     }
@@ -60,13 +61,16 @@ class MovieListFragment :
                 ).show()
                 return@setOnClickListener
             }
-
+            searched = true
             viewModel.searchForMovies(query)
         }
 
+
+
         binding.etQuery.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().isEmpty()) {
+            if (text.toString().isEmpty() && searched) {
                 fetchMovies(position)
+                searched = false
             }
         }
 
@@ -94,12 +98,14 @@ class MovieListFragment :
                 is MovieListResponseState.Failure -> {
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
                 }
+
                 is MovieListResponseState.Loading -> {
                     if (it.loading)
                         showDialog(getString(R.string.loading))
                     else
                         dismissDialog()
                 }
+
                 is MovieListResponseState.Success -> {
                     adapter.setData(it.movieList, it.favList)
                     adapter.onItemClick = { movie ->
@@ -122,12 +128,15 @@ class MovieListFragment :
             0 -> {
                 viewModel.getDiscoverMovie(Constants.MOVIE_MOST_POPULAR)
             }
+
             1 -> {
                 viewModel.getDiscoverMovie(Constants.MOVIE_TOP_RATED)
             }
+
             2 -> {
                 viewModel.getDiscoverMovie(Constants.MOVIE_COMING_SOON)
             }
+
             3 -> {
                 viewModel.getFavMovie(Constants.MOVIE_FAVORITE)
             }

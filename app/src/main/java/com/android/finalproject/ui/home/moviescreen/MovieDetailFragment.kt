@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.android.finalproject.R
 import com.android.finalproject.data.model.Movie
+import com.android.finalproject.data.model.VideosList
 import com.android.finalproject.databinding.FragmentMovieDetailBinding
 import com.android.finalproject.ui.base.BaseViewModelFragment
 import com.android.finalproject.util.Constants
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 
@@ -20,7 +24,9 @@ class MovieDetailFragment :
     BaseViewModelFragment<HomeViewModel, FragmentMovieDetailBinding>(
         HomeViewModel::class
     ) {
+    //https://www.youtube.com/watch?v=ThseAPVAtMQ
 
+    private lateinit var videoId: VideosList
     private val navArg: MovieDetailFragmentArgs by navArgs()
     private lateinit var movie: Movie
 
@@ -37,23 +43,41 @@ class MovieDetailFragment :
 
         movie = navArg.movie
         viewModel.getMovieVideos(movie.id)
-        fetishMovieIntoUi()
 
-    }
+        fetchMovieIntoUi()
 
-    override fun initObservers() {
-        super.initObservers()
-        viewModel.movieVideoResponseState.onEach {
-            when(it){
-                is MovieVideoResponseState.Failure -> {
-                }
-                is MovieVideoResponseState.Success -> {
+        binding.watchTrailerBtn.setOnClickListener {
+            videoId.results.let {
+                if (it?.size!! > 0) {
+                    it?.get(0)?.key?.let { key ->
+                        openYoutubeIntent(key)
+                    } ?: run {
+                        Toast.makeText(requireContext(), "No videos available!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "No videos available!", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
     }
 
-    private fun fetishMovieIntoUi() {
+    override fun initObservers() {
+        super.initObservers()
+        viewModel.movieVideoResponseState.onEach {
+            when (it) {
+                is MovieVideoResponseState.Failure -> {
+                }
+
+                is MovieVideoResponseState.Success -> {
+                    videoId = it.movieList
+                }
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun fetchMovieIntoUi() {
         setTitle()
         adultContentText()
         setLanguage()
@@ -83,7 +107,7 @@ class MovieDetailFragment :
     private fun setLanguage() {
         val movieLanguage = movie.original_language;
         val movieLanguageTextView = binding.originalLanguage;
-        movieLanguageTextView.text = movieLanguage;
+        movieLanguageTextView.text = movieLanguage?.uppercase();
     }
 
     private fun setMovieReleaseDate() {
@@ -120,12 +144,12 @@ class MovieDetailFragment :
             .into(binding.moviePoster)
     }
 
-    private fun watchTrailerBn(){
+    private fun watchTrailerBn() {
         binding.watchTrailerBtn.setOnClickListener {
         }
     }
 
-    private fun openYoutubeIntent(videoId : String){
+    private fun openYoutubeIntent(videoId: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$videoId"))
         intent.putExtra("VIDEO_ID", videoId)
         startActivity(intent)

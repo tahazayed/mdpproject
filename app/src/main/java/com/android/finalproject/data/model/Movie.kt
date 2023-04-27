@@ -15,7 +15,7 @@ data class Movie(
     val backdrop_path: String,
     @PrimaryKey
     val id: Int,
-    val original_language: String,
+    val original_language: String?,
     val original_title: String,
     val overview: String,
     val popularity: Double,
@@ -25,4 +25,19 @@ data class Movie(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int
-) : Parcelable
+) : Parcelable {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Movie
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id
+    }
+}

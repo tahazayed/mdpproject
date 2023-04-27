@@ -35,12 +35,12 @@
             android:layout_below="@+id/movie_title"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/movie_poster"
-            android:text="Vote Average"
             android:drawableEnd="@drawable/ic_rating"
             android:drawablePadding="@dimen/_4sdp"
+            android:text="Vote Average"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
-
 
 
     </RelativeLayout>
@@ -69,7 +69,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:text="English"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 
         <TextView
