@@ -13,4 +13,7 @@ interface MovieDao {
 
     @Delete
     fun removeMovieFromFav(movie: Movie): Int
+
+    @Query("DELETE FROM movie")
+    fun removeAllFav()
 }

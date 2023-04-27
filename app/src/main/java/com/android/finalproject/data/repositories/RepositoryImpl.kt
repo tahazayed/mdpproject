@@ -84,6 +84,12 @@ class RepositoryImp(
     override suspend fun removeSeriesFromFav(series: TvShow) =
         dbDataSource.removeSeriesFromFav(series)
 
+    override suspend fun deleteMyAccount(user: User) =
+        dbDataSource.deleteMyAccount(user)
+
+    override suspend fun deleteAllFav() =
+        dbDataSource.deleteAllFav()
+
     // ---------- end database------------
 
 

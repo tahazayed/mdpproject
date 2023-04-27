@@ -47,6 +47,7 @@ class SignUpViewModel(val repository: Repository) : BaseViewModel() {
 
             val response = repository.addUser(user)
             if (response != -1L) {
+                user.id = response.toInt()
                 _signUpResponseState.trySend(SignUpResponseState.Loading(false))
                 SessionManager.getInstance(repository)?.setActiveSession(user)
                 _signUpResponseState.trySend(SignUpResponseState.Success)

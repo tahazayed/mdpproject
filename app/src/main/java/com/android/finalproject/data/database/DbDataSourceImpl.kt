@@ -30,5 +30,11 @@ class DbDataSourceImpl(private val appDatabase: AppDatabase) : DbDataSource {
     override suspend fun removeSeriesFromFav(series: TvShow) =
         appDatabase.seriesDao().removeSeriesFromFav(series)
 
+    override suspend fun deleteMyAccount(user: User) =
+        appDatabase.userDao().deleteMyAccount(user)
 
+    override suspend fun deleteAllFav() {
+        appDatabase.movieDao().removeAllFav()
+        appDatabase.seriesDao().removeAllFav()
+    }
 }

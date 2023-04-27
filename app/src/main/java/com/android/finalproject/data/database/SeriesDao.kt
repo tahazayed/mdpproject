@@ -13,4 +13,7 @@ interface SeriesDao {
 
     @Delete
     fun removeSeriesFromFav(series: TvShow): Int
+
+    @Query("DELETE FROM series")
+    fun removeAllFav()
 }
