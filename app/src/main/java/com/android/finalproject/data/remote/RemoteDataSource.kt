@@ -6,11 +6,15 @@ import com.android.finalproject.data.model.TvShow
 import com.android.finalproject.data.model.TvShowsList
 import com.android.finalproject.data.model.VideosList
 import retrofit2.Response
+import retrofit2.http.Query
 
 interface RemoteDataSource {
     suspend fun getBaseAppResponse(): Response<String>
+
     suspend fun getPopularMovies(): Response<MoviesList>
+
     suspend fun getPopularTvShows(): Response<TvShowsList>
+
     suspend fun getDiscoverMovies(
         sortBy: String
     ): Response<MoviesList>
@@ -27,7 +31,6 @@ interface RemoteDataSource {
         tvId: Int
     ): Response<TvShow>
 
-
     suspend fun getMovieVideos(
         movieId: Int
     ): Response<VideosList>
@@ -35,4 +38,12 @@ interface RemoteDataSource {
     suspend fun getTvShowVideos(
         tvId: Int
     ): Response<VideosList>
+
+    suspend fun searchMovies(
+        query: String,
+    ): Response<MoviesList>
+
+    suspend fun searchSeries(
+        query: String,
+    ): Response<TvShowsList>
 }

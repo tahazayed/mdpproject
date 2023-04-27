@@ -14,14 +14,28 @@ class RemoteDataSourceImp(private val remoteApi: MovieAppAPI) : RemoteDataSource
     ) = withContext(Dispatchers.IO) {
         remoteApi.getPopularMovies(apiKey = BuildConfig.API_KEY)
     }
+
     override suspend fun getPopularTvShows(
     ) = withContext(Dispatchers.IO) {
         remoteApi.getPopularTvShows(apiKey = BuildConfig.API_KEY)
     }
+
     override suspend fun getDiscoverMovies(
         sortBy: String
     ) = withContext(Dispatchers.IO) {
         remoteApi.getDiscoverMovies(apiKey = BuildConfig.API_KEY, sortBy = sortBy)
+    }
+
+    override suspend fun searchMovies(
+        query: String
+    ) = withContext(Dispatchers.IO) {
+        remoteApi.searchMovies(apiKey = BuildConfig.API_KEY, query = query)
+    }
+
+    override suspend fun searchSeries(
+        query: String
+    ) = withContext(Dispatchers.IO) {
+        remoteApi.searchTvShows(apiKey = BuildConfig.API_KEY, query = query)
     }
 
     override suspend fun getDiscoverTvShows(

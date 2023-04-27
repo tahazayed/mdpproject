@@ -13,6 +13,7 @@ import com.android.finalproject.databinding.FragmentMovieDetailBinding
 import com.android.finalproject.ui.base.BaseViewModelFragment
 import com.android.finalproject.util.Constants
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.flow.onEach
 
 
 class MovieDetailFragment :
@@ -35,9 +36,21 @@ class MovieDetailFragment :
         super.initViews()
 
         movie = navArg.movie
-
+        viewModel.getMovieVideos(movie.id)
         fetishMovieIntoUi()
 
+    }
+
+    override fun initObservers() {
+        super.initObservers()
+        viewModel.movieVideoResponseState.onEach {
+            when(it){
+                is MovieVideoResponseState.Failure -> {
+                }
+                is MovieVideoResponseState.Success -> {
+                }
+            }
+        }
     }
 
     private fun fetishMovieIntoUi() {
@@ -48,7 +61,7 @@ class MovieDetailFragment :
         setAverageVote()
         setPopularity()
         setOverview()
-        setPicture() // TODO : Still needs t set the image path from the specified source in the movie object
+        setPicture()
     }
 
     private fun setTitle() {

@@ -35,13 +35,6 @@ interface MovieAppAPI {
         @Query("page") page: Int = 1
     ): Response<MoviesList>
 
-    @GET("genre/movie/list")
-    suspend fun getMoviesGenres(
-        @Query("api_key") apiKey: String,
-        @Query("language") language: String = "en-US",
-    ): Response<MovieGenreList>
-
-
     @GET("tv/{tvId}")
     suspend fun getTvShowDetails(
         @Path("tvId") tvId: Int,
@@ -63,12 +56,6 @@ interface MovieAppAPI {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1
     ): Response<TvShowsList>
-
-    @GET("genre/tv/list")
-    suspend fun getTvShowsGenres(
-        @Query("api_key") apiKey: String,
-        @Query("language") language: String = "en-US",
-    ): Response<TvGenreList>
 
     @GET("discover/tv")
     suspend fun getDiscoverTvShows(

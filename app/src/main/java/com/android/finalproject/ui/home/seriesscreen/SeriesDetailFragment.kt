@@ -10,8 +10,10 @@ import com.android.finalproject.data.model.TvShow
 import com.android.finalproject.databinding.FragmentSeriesDetailBinding
 import com.android.finalproject.ui.base.BaseViewModelFragment
 import com.android.finalproject.ui.home.moviescreen.HomeViewModel
+import com.android.finalproject.ui.home.moviescreen.MovieVideoResponseState
 import com.android.finalproject.util.Constants
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.flow.onEach
 
 
 class SeriesDetailFragment :
@@ -34,7 +36,23 @@ class SeriesDetailFragment :
         super.initViews()
 
         series = navArg.series
+        viewModel.getSeriesVideos(series.id)
+
         fetishMovieIntoUi()
+    }
+
+    override fun initObservers() {
+        super.initObservers()
+        viewModel.seriesVideoResponseState.onEach {
+            when(it){
+                is SeriesVideoResponseState.Failure -> {
+
+                }
+                is SeriesVideoResponseState.Success -> {
+
+                }
+            }
+        }
     }
 
     private fun fetishMovieIntoUi(){
@@ -44,7 +62,7 @@ class SeriesDetailFragment :
         setAverageVote()
         setPopularity()
         setOverview()
-        setPicture() // TODO : Still needs t set the image path from the specified source in the movie object
+        setPicture()
     }
 
     private fun setTitle() {

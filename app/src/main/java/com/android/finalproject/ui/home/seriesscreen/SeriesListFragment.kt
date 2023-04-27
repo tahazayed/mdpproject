@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.android.finalproject.R
@@ -23,11 +24,11 @@ class SeriesListFragment :
     BaseViewModelFragment<HomeViewModel, FragmentSeriesListBinding>(
         HomeViewModel::class
     ) {
+    private var position = 0
 
     private val adapter: SeriesAdapter by lazy {
         SeriesAdapter(context = requireContext())
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +50,26 @@ class SeriesListFragment :
 
         binding.sprSortBy.adapter = sprAdapter
 
+        binding.ivSearch.setOnClickListener {
+            val query = binding.etQuery.text.toString()
+            if (query.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.write__query),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            viewModel.searchForSeries(query)
+        }
+
+        binding.etQuery.doOnTextChanged { text, _, _, _ ->
+            if (text.toString().isEmpty()) {
+                fetchSeries(position)
+            }
+        }
+
         binding.sprSortBy.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -56,20 +77,7 @@ class SeriesListFragment :
                 position: Int,
                 id: Long
             ) {
-                when (position) {
-                    0 -> {
-                        viewModel.getDiscoverSeries(Constants.SERIES_MOST_POPULAR)
-                    }
-                    1 -> {
-                        viewModel.getDiscoverSeries(Constants.SERIES_TOP_RATED)
-                    }
-                    2 -> {
-                        viewModel.getDiscoverSeries(Constants.SERIES_COMING_SOON)
-                    }
-                    3 -> {
-                        viewModel.getFavSeries(Constants.SERIES_FAVORITE)
-                    }
-                }
+                fetchSeries(position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -115,4 +123,23 @@ class SeriesListFragment :
         )
     }
 
+
+    private fun fetchSeries(position: Int) {
+        this.position = position
+
+        when (position) {
+            0 -> {
+                viewModel.getDiscoverSeries(Constants.SERIES_MOST_POPULAR)
+            }
+            1 -> {
+                viewModel.getDiscoverSeries(Constants.SERIES_TOP_RATED)
+            }
+            2 -> {
+                viewModel.getDiscoverSeries(Constants.SERIES_COMING_SOON)
+            }
+            3 -> {
+                viewModel.getFavSeries(Constants.SERIES_FAVORITE)
+            }
+        }
+    }
 }

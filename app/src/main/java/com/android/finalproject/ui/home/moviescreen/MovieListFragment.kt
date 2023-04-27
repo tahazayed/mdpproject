@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.android.finalproject.R
@@ -23,6 +24,7 @@ class MovieListFragment :
     BaseViewModelFragment<HomeViewModel, FragmentMovieListBinding>(
         HomeViewModel::class
     ) {
+    private var position = 0
 
     private val adapter: MovieAdapter by lazy {
         MovieAdapter(context = requireContext())
@@ -48,6 +50,26 @@ class MovieListFragment :
 
         binding.sprSortBy.adapter = sprAdapter
 
+        binding.ivSearch.setOnClickListener {
+            val query = binding.etQuery.text.toString()
+            if (query.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.write__query),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            viewModel.searchForMovies(query)
+        }
+
+        binding.etQuery.doOnTextChanged { text, _, _, _ ->
+            if (text.toString().isEmpty()) {
+                fetchMovies(position)
+            }
+        }
+
         binding.sprSortBy.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -55,20 +77,7 @@ class MovieListFragment :
                 position: Int,
                 id: Long
             ) {
-                when (position) {
-                    0 -> {
-                        viewModel.getDiscoverMovie(Constants.MOVIE_MOST_POPULAR)
-                    }
-                    1 -> {
-                        viewModel.getDiscoverMovie(Constants.MOVIE_TOP_RATED)
-                    }
-                    2 -> {
-                        viewModel.getDiscoverMovie(Constants.MOVIE_COMING_SOON)
-                    }
-                    3 -> {
-                        viewModel.getFavMovie(Constants.MOVIE_FAVORITE)
-                    }
-                }
+                fetchMovies(position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -104,6 +113,25 @@ class MovieListFragment :
             }
         }.launchIn(lifecycleScope)
 
+    }
+
+    private fun fetchMovies(position: Int) {
+        this.position = position
+
+        when (this.position) {
+            0 -> {
+                viewModel.getDiscoverMovie(Constants.MOVIE_MOST_POPULAR)
+            }
+            1 -> {
+                viewModel.getDiscoverMovie(Constants.MOVIE_TOP_RATED)
+            }
+            2 -> {
+                viewModel.getDiscoverMovie(Constants.MOVIE_COMING_SOON)
+            }
+            3 -> {
+                viewModel.getFavMovie(Constants.MOVIE_FAVORITE)
+            }
+        }
     }
 
     private fun showMovieDetailsScreen(movie: Movie) {

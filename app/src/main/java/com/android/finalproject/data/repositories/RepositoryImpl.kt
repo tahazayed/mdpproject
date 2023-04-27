@@ -57,6 +57,18 @@ class RepositoryImp(
     override suspend fun getDiscoverTvShows(sortBy: String) =
         safeAPIResult(remoteDataSource.getDiscoverTvShows(sortBy))
 
+    override suspend fun searchMovies(query: String) =
+        safeAPIResult(remoteDataSource.searchMovies(query))
+
+    override suspend fun searchSeries(query: String) =
+        safeAPIResult(remoteDataSource.searchSeries(query))
+
+    override suspend fun getMovieVideos(movieId: Int) =
+        safeAPIResult(remoteDataSource.getMovieVideos(movieId))
+
+    override suspend fun getTvShowVideos(tvId: Int) =
+        safeAPIResult(remoteDataSource.getTvShowVideos(tvId))
+
     // ---------- end remote------------
 
     // ---------- offline------------
